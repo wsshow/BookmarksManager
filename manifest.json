@@ -1,0 +1,32 @@
+{
+    "name": "Bookmarks Manager",
+    "version": "1.0",
+    "description": "bookmarks manager for chrome",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "bg-wrapper.js"
+    },
+    "icons": {
+        "128": "./img/logo.png"
+    },
+    "permissions": [
+        "bookmarks"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Bookmarks Manager"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.baidu.com./*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "content.css"
+            ]
+        }
+    ]
+}

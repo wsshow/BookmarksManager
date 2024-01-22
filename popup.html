@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./mdui/icon.css">
+    <link rel="stylesheet" href="./mdui/mdui.css">
+    <link rel="stylesheet" href="./popup.css">
+    <script src="./mdui/mdui.js"></script>
+    <title>书签管理器</title>
+</head>
+
+<body>
+    <mdui-text-field id="search" icon="search" clearable variant="outlined" label="请输入需要检索的书签名称"></mdui-text-field>
+    <mdui-list id="search-list">
+    </mdui-list>
+    <mdui-divider></mdui-divider>
+    <mdui-list id="list">
+    </mdui-list>
+    <mdui-fab icon="vertical_align_top" id="fab" size="small"></mdui-fab>
+</body>
+<script src="./popup.js"></script>
+
+</html>
