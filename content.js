@@ -7,6 +7,7 @@ document.body.innerHTML += `
             </div>
             <input class="search_input" placeholder="请输入需要检索的书签名称" type="text">
         </div>
+        <ul id="bm_search_list" class="dropdown"></ul>
 </div>
 `
 
@@ -17,15 +18,36 @@ bmSearch.style.position = 'absolute';
 
 bmSearch.style.right = 0 + 'px'
 bmSearch.style.top = (winHeight / 3) + 'px'
-console.log(bmSearch);
 
 const searchInput = bmSearch.querySelector('.search_input');
 const checkbox = bmSearch.querySelector('.checkbox');
+const bmSearchList = document.querySelector('#bm_search_list');
 
-searchInput.addEventListener('focus', (e) => {
-  console.log(e);
+searchInput.addEventListener('input', () => {
+  if (bmSearchList.style.display === 'none') {
+    bmSearchList.style.display = 'block';
+  }
+  bookmarkSearch(searchInput.value)
 })
 
 searchInput.addEventListener('blur', (e) => {
   checkbox.checked = true;
+  bmSearchList.style.display = 'none';
 })
+
+function bookmarkSearch(name) {
+  chrome.runtime.sendMessage({
+    op: 'searchBookmarks',
+    query: name
+  }, res => {
+    bmSearchList.innerHTML = '';
+    res.forEach(el => {
+      if (!el.url) {
+        return;
+      }
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${el.url}">${el.title}</a>`;
+      bmSearchList.appendChild(li);
+    });
+  })
+}
