@@ -1,6 +1,6 @@
 document.body.innerHTML += `
 <div class="wsbm-s-main">
-      <h3 class="wsbm-s-title">Searcher</h3>
+      <div class="wsbm-s-title">Searcher</div>
       <div class="wsbm-s-box">
         <input class="wsbm-s-input" type="text" placeholder="输入关键词进行检索" />
         <button class="wsbm-s-btn">搜索</button>
