@@ -1,7 +1,8 @@
 {
     "name": "Bookmarks Manager",
-    "version": "1.0",
-    "description": "bookmarks manager for chrome",
+    "version": "1.0.1",
+    "author": "wsshow",
+    "description": "高效的浏览器书签管理插件",
     "manifest_version": 3,
     "background": {
         "service_worker": "bg-wrapper.js"
