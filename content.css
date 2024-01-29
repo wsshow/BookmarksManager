@@ -1,99 +1,140 @@
-.container {
-    position: relative;
-    box-sizing: border-box;
-    width: fit-content;
-}
-
-.mainbox {
-    box-sizing: border-box;
-    position: relative;
-    width: 230px;
-    height: 50px;
+.wsbm-s-main {
     display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    border-radius: 160px;
-    background-color: rgb(0, 0, 0);
-    transition: all 0.3s ease;
+    align-items: center;
+    width: 20rem;
+    background-color: #222222;
+    color: #FFFFFF;
+    margin: 0.3rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: all 0.5s;
+    position: fixed;
+    right: 0;
+    top: 10rem;
 }
 
-.checkbox:focus {
-    border: none;
-    outline: none;
-}
-
-.checkbox:checked {
-    right: 10px;
-}
-
-.checkbox:checked~.mainbox {
-    width: 50px;
-}
-
-.checkbox:checked~.mainbox .search_input {
-    width: 0;
-    height: 0px;
-}
-
-.checkbox:checked~.mainbox .iconContainer {
-    padding-right: 8px;
-}
-
-.checkbox {
-    box-sizing: border-box;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    right: 17px;
-    top: 10px;
-    z-index: 9;
-    cursor: pointer;
-    appearance: none;
-}
-
-.search_input {
-    box-sizing: border-box;
-    height: 100%;
-    width: 170px;
+.wsbm-s-main-hide {
     background-color: transparent;
-    border: none;
+    width: 0.1rem;
+    transition: all 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-property: width, height, margin, padding;
+}
+
+.wsbm-s-box {
+    display: flex;
+    margin: 0.5rem;
+}
+
+.wsbm-s-input {
+    height: 2rem;
+    padding: 0.2rem;
+    width: 12rem;
+    border: 1px solid rgb(0, 238, 255);
+    box-shadow: 0 0 10px rgb(0, 238, 255);
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font-variant: small-caps;
+}
+
+.wsbm-s-input:focus {
     outline: none;
-    padding-bottom: 4px;
-    padding-left: 10px;
-    font-size: 1em;
-    color: white;
-    transition: all 0.3s ease;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.search_input::placeholder {
-    color: rgba(255, 255, 255, 0.776);
+.wsbm-s-btn {
+    width: 5rem;
+    cursor: pointer;
+    background-color: rgb(104, 151, 123);
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font-variant: small-caps;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgb(104, 151, 123);
+    color: #FFFFFF;
+    border: 1px solid rgb(104, 151, 123);
 }
 
-.iconContainer {
-    box-sizing: border-box;
-    padding-top: 5px;
-    width: fit-content;
-    transition: all 0.3s ease;
-}
-
-.search_icon {
-    box-sizing: border-box;
-    fill: white;
-    font-size: 1.3em;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
+.wsbm-s-list {
+    padding: 0.2rem;
+    margin: 0;
+    list-style: none;
     display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 12px 16px;
+    flex-direction: column;
+    width: 17.4rem;
+    max-height: 16rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.wsbm-s-list::-webkit-scrollbar {
+    width: 0rem;
+}
+
+.wsbm-s-list li {
+    margin-bottom: 0.2rem;
+    padding: 0.2rem;
+    transition: 0.3s;
+    text-align: left;
+    font-size: 0.8rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font-variant: small-caps;
+    color: #FFFFFF;
+    border: #08b4f2 1px solid;
+    word-wrap: break-word;
+}
+
+.wsbm-s-list li:hover {
+    cursor: pointer;
+    color: #000000;
+    background-color: #08b4f2;
+}
+
+.wsbm-s-title {
+    line-height: normal;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font-variant: small-caps;
+    color: rgb(104, 151, 123);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(104, 151, 123);
+    background-color: #222222;
+}
+
+.wsbm-s-title:hover {
+    color: #FFFFFF;
+}
+
+.wsbm-s-list li a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.wsbm-s-list li a:link {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.wsbm-s-list li a:visited {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.wsbm-s-list li a:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.wsbm-s-list li a:active {
+    text-decoration: none;
+    color: #FFFFFF;
 }

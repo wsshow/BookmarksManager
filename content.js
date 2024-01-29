@@ -1,53 +1,115 @@
 document.body.innerHTML += `
-<div class="container" id="bm_search">
-        <input checked="" class="checkbox" type="checkbox"> 
-        <div class="mainbox">
-            <div class="iconContainer">
-                <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
-            </div>
-            <input class="search_input" placeholder="请输入需要检索的书签名称" type="text">
-        </div>
-        <ul id="bm_search_list" class="dropdown"></ul>
-</div>
+<div class="wsbm-s-main">
+      <h3 class="wsbm-s-title">Searcher</h3>
+      <div class="wsbm-s-box">
+        <input class="wsbm-s-input" type="text" placeholder="输入关键词进行检索" />
+        <button class="wsbm-s-btn">搜索</button>
+      </div>
+      <ul class="wsbm-s-list"></ul>
+    </div>
 `
 
-const bmSearch = document.getElementById('bm_search');
+const objList = document.querySelector(".wsbm-s-list");
+const objInput = document.querySelector(".wsbm-s-input");
+const objBtn = document.querySelector(".wsbm-s-btn");
+const objTitle = document.querySelector(".wsbm-s-title");
+const objBox = document.querySelector(".wsbm-s-box");
+const objMain = document.querySelector(".wsbm-s-main");
+
 const winWidth = window.innerWidth;
 const winHeight = window.innerHeight;
-bmSearch.style.position = 'absolute';
+objMain.style.top = (winHeight / 3) + 'px'
 
-bmSearch.style.right = 0 + 'px'
-bmSearch.style.top = (winHeight / 3) + 'px'
+window.addEventListener("load", function () {
+  hideMain();
+})
 
-const searchInput = bmSearch.querySelector('.search_input');
-const checkbox = bmSearch.querySelector('.checkbox');
-const bmSearchList = document.querySelector('#bm_search_list');
-
-searchInput.addEventListener('input', () => {
-  if (bmSearchList.style.display === 'none') {
-    bmSearchList.style.display = 'block';
+objBtn.addEventListener("click", function () {
+  objList.innerHTML = "";
+  if (!objInput.value) {
+    const li = document.createElement("li");
+    li.textContent = "请输入关键词再进行检索";
+    li.style.color = "red";
+    objList.appendChild(li);
+    objList.style.display = "flex";
+    return;
   }
-  bookmarkSearch(searchInput.value)
-})
+  bookmarkSearch(objInput.value)
+  objList.style.display = "flex";
+});
 
-searchInput.addEventListener('blur', (e) => {
-  checkbox.checked = true;
-  bmSearchList.style.display = 'none';
-})
+objInput.addEventListener("input", function () {
+  if (!objInput.value) {
+    objList.style.display = "none";
+    return;
+  }
+});
+
+objTitle.addEventListener("click", function () {
+  if (objBox.style.display === "none") {
+    showMain();
+  } else {
+    hideMain();
+  }
+});
+
+function isBoxHide() {
+  return objBox.style.display === "none";
+}
+
+function showMain() {
+  objBox.style.display = "flex";
+  objMain.classList.remove("wsbm-s-main-hide");
+}
+
+function hideMain() {
+  objBox.style.display = "none";
+  objList.style.display = "none";
+  objMain.classList.add("wsbm-s-main-hide");
+}
+
+document.addEventListener("keyup", function (e) {
+  if (e.key === "/") {
+    if (objBox.style.display === "none") {
+      showMain();
+    }
+    objInput.focus();
+    return;
+  }
+  if (e.key === "Escape") {
+    if (objBox.style.display !== "none") {
+      hideMain();
+    }
+    return;
+  }
+  if (e.key === "Enter") {
+    isBoxHide() || objBtn.click();
+    return;
+  }
+});
 
 function bookmarkSearch(name) {
   chrome.runtime.sendMessage({
     op: 'searchBookmarks',
     query: name
   }, res => {
-    bmSearchList.innerHTML = '';
+    objList.innerHTML = '';
+    if (res.length === 0) {
+      const li = document.createElement('li');
+      li.textContent = "未检索到匹配的内容";
+      objList.appendChild(li);
+      return;
+    }
     res.forEach(el => {
       if (!el.url) {
         return;
       }
       const li = document.createElement('li');
-      li.innerHTML = `<a href="${el.url}">${el.title}</a>`;
-      bmSearchList.appendChild(li);
+      li.onclick = () => {
+        li.querySelector('a').click();
+      }
+      li.innerHTML = `<a href="${el.url}" target="_blank" rel="noopener noreferrer">${el.title}</a>`;
+      objList.appendChild(li);
     });
   })
 }
