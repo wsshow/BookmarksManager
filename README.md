@@ -9,5 +9,5 @@
 - `Enter` 进行检索
 
 ## 界面
-![content](./img/main.png)
-![popup](./img/main.png)
+![content](./img/content.png)
+![popup](./img/popup.png)
